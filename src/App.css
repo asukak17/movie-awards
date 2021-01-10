@@ -20,3 +20,8 @@
   max-width: 250px;
   margin: 5px;
 }
+
+main {
+  display: flex;
+  justify-content: center;
+}

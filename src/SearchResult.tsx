@@ -1,13 +1,13 @@
-import React, { ChangeEvent, useState } from "react";
-import TextField from "@material-ui/core/TextField";
+import React from "react";
 import "./App.css";
 import { Button, Card, CardActions, CardContent, CardMedia } from "@material-ui/core";
 
 type Props = {
   searchResult: IResponse | null;
+  onNominationChange: (result: IResult) => void;
 };
 
-export interface Result {
+export interface IResult {
   Actors: string;
   Awards: string;
   BoxOffice: string;
@@ -36,13 +36,13 @@ export interface Result {
 }
 
 export interface IResponse {
-  Search?: Array<Result>;
+  Search?: Array<IResult>;
   totalResults?: string;
   Response: string;
   Error?: string;
 }
 
-function SearchResult({ searchResult }: Props) {
+function SearchResult({ searchResult, onNominationChange }: Props) {
   if (!searchResult || searchResult.Error) return <></>;
   function showSearchResult() {
     return searchResult?.Search?.map((result) => (
@@ -61,7 +61,7 @@ function SearchResult({ searchResult }: Props) {
           </p>
         </CardContent>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={() => onNominationChange(result)}>
             Nominate this
           </Button>
         </CardActions>
