@@ -5,6 +5,8 @@ import { Button, Card, CardActions, CardContent, CardMedia } from "@material-ui/
 type Props = {
   searchResult: IResponse | null;
   onNominationChange: (result: IResult) => void;
+  nominations: IResult[];
+  nominationCompleted: boolean;
 };
 
 export interface IResult {
@@ -42,8 +44,17 @@ export interface IResponse {
   Error?: string;
 }
 
-function SearchResult({ searchResult, onNominationChange }: Props) {
-  if (!searchResult || searchResult.Error) return <></>;
+function SearchResult({
+  searchResult,
+  onNominationChange,
+  nominations,
+  nominationCompleted,
+}: Props) {
+  function isNominated(result: IResult) {
+    const nominatedMatch = nominations.find((nomination) => nomination.imdbID === result.imdbID);
+    return nominatedMatch ? true : false;
+  }
+
   function showSearchResult() {
     return searchResult?.Search?.map((result) => (
       <Card variant="elevation" className="result-card" key={result.imdbID}>
@@ -61,17 +72,33 @@ function SearchResult({ searchResult, onNominationChange }: Props) {
           </p>
         </CardContent>
         <CardActions>
-          <Button size="small" color="primary" onClick={() => onNominationChange(result)}>
+          <Button
+            disabled={isNominated(result) || nominationCompleted}
+            size="small"
+            color="primary"
+            onClick={() => onNominationChange(result)}
+          >
             Nominate this
           </Button>
         </CardActions>
       </Card>
     ));
   }
+
+  function showNoResult() {
+    return (
+      <Card variant="elevation" className="result-card">
+        <CardContent>
+          <p>No results found</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <div className="Search-box">
       <h2>Results from search</h2>
-      {showSearchResult()}
+      {!searchResult || searchResult.Error ? showNoResult() : showSearchResult()}
     </div>
   );
 }

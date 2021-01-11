@@ -9,9 +9,7 @@ type Props = {
 };
 
 function SearchResult({ nominations, onNominationRemove }: Props) {
-  if (!nominations.length) return <></>;
   function showSearchResult() {
-    console.log(nominations);
     return nominations?.map((result) => (
       <Card variant="elevation" className="result-card" key={result.imdbID}>
         <CardMedia
@@ -35,10 +33,21 @@ function SearchResult({ nominations, onNominationRemove }: Props) {
       </Card>
     ));
   }
+
+  function showNoNominations() {
+    return (
+      <Card variant="elevation" className="result-card">
+        <CardContent>
+          <p>No nominations picked yet</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <div className="nominations">
       <h2>Nomination list</h2>
-      {showSearchResult()}
+      {nominations.length ? showSearchResult() : showNoNominations()}
     </div>
   );
 }
