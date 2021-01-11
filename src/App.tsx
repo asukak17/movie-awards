@@ -14,6 +14,13 @@ function App() {
     setNominationCompleted(nominations.length >= 5);
   }, [nominations]);
 
+  useEffect(() => {
+    if (nominations.length) return;
+    const savedNominations = localStorage.getItem("myNominations");
+    if (!savedNominations) return;
+    setNominations(JSON.parse(savedNominations));
+  }, []);
+
   function handleSearchResult(data: IResponse) {
     setSearchResult(data);
   }
@@ -22,11 +29,16 @@ function App() {
     const matchedMovie = nominations.find((result: IResult) => result.imdbID === movie.imdbID);
     if (matchedMovie) return;
     setNominations((nominations) => [...nominations, movie]);
+    localStorage.setItem("myNominations", JSON.stringify([...nominations, movie]));
   }
 
   function handleRemoveNomination(movie: IResult) {
     setNominations((nominations) =>
       nominations.filter((nomination) => nomination.imdbID !== movie.imdbID)
+    );
+    localStorage.setItem(
+      "myNominations",
+      JSON.stringify(nominations.filter((nomination) => nomination.imdbID !== movie.imdbID))
     );
   }
 
