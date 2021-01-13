@@ -2,6 +2,8 @@ import React, { ChangeEvent, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import "./App.css";
 import { IResponse } from "./SearchResult";
+import { IconButton } from "@material-ui/core";
+import { Search } from "@material-ui/icons";
 
 type Prop = {
   onResultChange: (data: IResponse) => void;
@@ -21,7 +23,8 @@ function SearchBox({ onResultChange }: Prop) {
     }
   }
   return (
-    <div className="Search-box">
+    <section className="Search-box">
+      <h2>Search Movies</h2>
       <form>
         <TextField
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
@@ -30,9 +33,16 @@ function SearchBox({ onResultChange }: Prop) {
           value={searchKey}
           label="Movie Title"
           defaultValue="Hello World"
+          InputProps={{
+            startAdornment: (
+              <IconButton>
+                <Search />
+              </IconButton>
+            ),
+          }}
         />
       </form>
-    </div>
+    </section>
   );
 }
 

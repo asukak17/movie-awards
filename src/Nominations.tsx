@@ -11,15 +11,15 @@ type Props = {
 function SearchResult({ nominations, onNominationRemove }: Props) {
   function showSearchResult() {
     return nominations?.map((result) => (
-      <Card variant="elevation" className="result-card" key={result.imdbID}>
+      <Card variant="elevation" className="nomination-card" key={result.imdbID}>
         <CardMedia
           component="img"
           alt={result.Title}
-          height={140}
+          height={100}
           image={result.Poster}
           title={result.Title}
         />
-        <CardContent>
+        <CardContent className="card-content">
           <p>
             <strong>{result.Title}</strong>
             {result.Year}
@@ -45,10 +45,12 @@ function SearchResult({ nominations, onNominationRemove }: Props) {
   }
 
   return (
-    <div className="nominations">
+    <section>
       <h2>Nomination list</h2>
-      {nominations.length ? showSearchResult() : showNoNominations()}
-    </div>
+      <div className="nominations-container">
+        {nominations.length ? showSearchResult() : showNoNominations()}
+      </div>
+    </section>
   );
 }
 

@@ -96,10 +96,12 @@ function SearchResult({
   }
 
   return (
-    <div className="Search-box">
+    <section className="Search-box">
       <h2>Results from search</h2>
-      {!searchResult || searchResult.Error ? showNoResult() : showSearchResult()}
-    </div>
+      <div className="search-box-container">
+        {!searchResult || searchResult.Error ? showNoResult() : showSearchResult()}
+      </div>
+    </section>
   );
 }
 
