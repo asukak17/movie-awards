@@ -1,13 +1,14 @@
 import { Alert } from "@material-ui/lab";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "./App.css";
 import Nominations from "./Nominations";
 import SearchBox from "./SearchBox";
 import SearchResult from "./SearchResult";
-import headerImage from "./header-image.svg";
 import { AppContext } from "./Context/context";
 import { Types } from "./Context/types";
-
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Home from "./Home";
+import SideBar from "./Drawer";
 function App() {
   const {
     state: { nominations, nominationCompleted },
@@ -26,25 +27,27 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>
-          The Shoppies
-          <img src={headerImage} width={100} height={100} alt="mission impossible" />
-        </h1>
-      </header>
-      <main>
-        {nominationCompleted && (
-          <Alert elevation={6} variant="filled" severity="success">
-            5 nominations picked!
-          </Alert>
-        )}
-        <h3>Choose your 5 best movies</h3>
+    <Router>
+      <Home />
+      <main className="App">
         <SearchBox />
-        <Nominations />
-        <SearchResult />
+        <Route exact path="/">
+          <SearchResult />
+        </Route>
+        <Route path="/nominations">
+          <Nominations />
+        </Route>
+        <SideBar />
+        <Alert
+          className={`nomination-complete-toast ${nominationCompleted && "show"}`}
+          elevation={6}
+          variant="filled"
+          severity="success"
+        >
+          5 nominations successfully picked!
+        </Alert>
       </main>
-    </div>
+    </Router>
   );
 }
 

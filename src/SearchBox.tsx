@@ -6,12 +6,14 @@ import { IconButton } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { AppContext } from "./Context/context";
 import { Types } from "./Context/types";
+import { useHistory } from "react-router-dom";
 
-function SearchBox() {
+function SearchBox(props: any) {
   const { dispatch } = useContext(AppContext);
+  let history = useHistory();
 
   const [searchKey, setSearchKey] = useState<string>("");
-  async function handleSubmit(typedKeyword: string) {
+  async function handleChange(typedKeyword: string) {
     setSearchKey(typedKeyword);
     try {
       const response = await fetch(
@@ -22,14 +24,22 @@ function SearchBox() {
       console.log("error", err);
     }
   }
+
+  function handleSubmit(event: any) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      history.push("/");
+    }
+  }
   return (
     <section className="Search-box">
       <h2>Search Movies</h2>
       <form>
         <TextField
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
-            handleSubmit(e.target.value)
+            handleChange(e.target.value)
           }
+          onKeyPress={handleSubmit}
           value={searchKey}
           label="Movie Title"
           InputProps={{
