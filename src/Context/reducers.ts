@@ -23,6 +23,11 @@ export const mainReducer: Reducer<InitialStateType, actions> = (state, action) =
         ...state,
         nominations: action.payload,
       };
+    case "SET_NOMINATION_COMPLETED":
+      return {
+        ...state,
+        nominationCompleted: action.payload,
+      };
     default:
       return state;
   }

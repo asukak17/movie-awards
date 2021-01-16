@@ -5,6 +5,7 @@ export enum Types {
   addNomination = "ADD_NOMINATION",
   removeNomination = "REMOVE_NOMINATION",
   setNominations = "SET_NOMINATIONS",
+  setNominationCompleted = "SET_NOMINATION_COMPLETED",
 }
 
 export type payload = {
@@ -12,6 +13,7 @@ export type payload = {
   [Types.addNomination]: IResult;
   [Types.setNominations]: IResult[];
   [Types.removeNomination]: IResult;
+  [Types.setNominationCompleted]: boolean;
 };
 
 export type ActionMap<M extends { [index: string]: any }> = {

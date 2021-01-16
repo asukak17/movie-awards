@@ -10,14 +10,12 @@ import { Types } from "./Context/types";
 
 function App() {
   const {
-    state: { nominations },
+    state: { nominations, nominationCompleted },
     dispatch,
   } = useContext(AppContext);
 
-  const [nominationCompleted, setNominationCompleted] = useState<boolean>(false);
-
   useEffect(() => {
-    setNominationCompleted(nominations.length >= 5);
+    dispatch({ type: Types.setNominationCompleted, payload: nominations.length >= 5 });
   }, [nominations.length]);
 
   useEffect(() => {
