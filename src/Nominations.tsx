@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.css";
 import { Button, Card, CardActions, CardContent, CardMedia } from "@material-ui/core";
 import { IResult } from "./SearchResult";
+import { AppContext } from "./Context/context";
 
 type Props = {
-  nominations: IResult[];
   onNominationRemove: (result: IResult) => void;
 };
 
-function SearchResult({ nominations, onNominationRemove }: Props) {
+function Nominations({ onNominationRemove }: Props) {
+  const { state } = useContext(AppContext);
+
   function showSearchResult() {
-    return nominations?.map((result) => (
+    return state.nominations?.map((result) => (
       <Card variant="elevation" className="nomination-card" key={result.imdbID}>
         <CardMedia
           component="img"
@@ -48,10 +50,10 @@ function SearchResult({ nominations, onNominationRemove }: Props) {
     <section>
       <h2>Nomination list</h2>
       <div className="nominations-container">
-        {nominations.length ? showSearchResult() : showNoNominations()}
+        {state.nominations.length ? showSearchResult() : showNoNominations()}
       </div>
     </section>
   );
 }
 
-export default SearchResult;
+export default Nominations;

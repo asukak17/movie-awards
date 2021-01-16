@@ -32,7 +32,6 @@ function SearchBox({ onResultChange }: Prop) {
           }
           value={searchKey}
           label="Movie Title"
-          defaultValue="Hello World"
           InputProps={{
             startAdornment: (
               <IconButton>

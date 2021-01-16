@@ -38,7 +38,7 @@ export interface IResult {
 }
 
 export interface IResponse {
-  Search?: Array<IResult>;
+  Search?: IResult[];
   totalResults?: string;
   Response: string;
   Error?: string;

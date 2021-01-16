@@ -1,13 +1,20 @@
 import { Alert } from "@material-ui/lab";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 import Nominations from "./Nominations";
 import SearchBox from "./SearchBox";
 import SearchResult, { IResponse, IResult } from "./SearchResult";
 import headerImage from "./header-image.svg";
+import { AppContext } from "./Context/context";
+import { Types } from "./Context/types";
+
 function App() {
+  const {
+    state: { nominations },
+    dispatch,
+  } = useContext(AppContext);
+
   const [searchResult, setSearchResult] = useState<IResponse | null>(null);
-  const [nominations, setNominations] = useState<IResult[]>([]);
   const [nominationCompleted, setNominationCompleted] = useState<boolean>(false);
 
   useEffect(() => {
@@ -18,7 +25,7 @@ function App() {
     if (nominations.length) return;
     const savedNominations = localStorage.getItem("myNominations");
     if (!savedNominations) return;
-    setNominations(JSON.parse(savedNominations));
+    dispatch({ type: Types.setNominations, payload: JSON.parse(savedNominations) });
   }, []);
 
   function handleSearchResult(data: IResponse) {
@@ -28,14 +35,12 @@ function App() {
   function handleNominationChange(movie: IResult) {
     const matchedMovie = nominations.find((result: IResult) => result.imdbID === movie.imdbID);
     if (matchedMovie) return;
-    setNominations((nominations) => [...nominations, movie]);
+    dispatch({ type: Types.addNomination, payload: movie });
     localStorage.setItem("myNominations", JSON.stringify([...nominations, movie]));
   }
 
   function handleRemoveNomination(movie: IResult) {
-    setNominations((nominations) =>
-      nominations.filter((nomination) => nomination.imdbID !== movie.imdbID)
-    );
+    dispatch({ type: Types.removeNomination, payload: movie });
     localStorage.setItem(
       "myNominations",
       JSON.stringify(nominations.filter((nomination) => nomination.imdbID !== movie.imdbID))
@@ -58,7 +63,7 @@ function App() {
         )}
         <h3>Choose your 5 best movies</h3>
         <SearchBox onResultChange={handleSearchResult} />
-        <Nominations nominations={nominations} onNominationRemove={handleRemoveNomination} />
+        <Nominations onNominationRemove={handleRemoveNomination} />
         <SearchResult
           nominationCompleted={nominationCompleted}
           searchResult={searchResult}
