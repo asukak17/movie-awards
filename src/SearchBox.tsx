@@ -7,8 +7,9 @@ import { Search } from "@material-ui/icons";
 import { AppContext } from "./Context/context";
 import { Types } from "./Context/types";
 import { useHistory } from "react-router-dom";
+import { Color } from "./color.enum";
 
-function SearchBox(props: any) {
+function SearchBox() {
   const { dispatch } = useContext(AppContext);
   let history = useHistory();
 
@@ -34,23 +35,24 @@ function SearchBox(props: any) {
   return (
     <section className="Search-box">
       <h2>Search Movies</h2>
-      <form>
-        <TextField
-          onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
-            handleChange(e.target.value)
-          }
-          onKeyPress={handleSubmit}
-          value={searchKey}
-          label="Movie Title"
-          InputProps={{
-            startAdornment: (
-              <IconButton>
-                <Search />
-              </IconButton>
-            ),
-          }}
-        />
-      </form>
+      <TextField
+        variant="outlined"
+        style={{ color: Color.lightText }}
+        onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
+          handleChange(e.target.value)
+        }
+        onKeyPress={handleSubmit}
+        value={searchKey}
+        label="Movie Title"
+        InputProps={{
+          startAdornment: (
+            <IconButton>
+              <Search />
+            </IconButton>
+          ),
+          style: { color: Color.lightText },
+        }}
+      />
     </section>
   );
 }

@@ -1,16 +1,20 @@
 .App {
   text-align: center;
+  color: #fff;
+  background-color: #1b4c3f;
+  min-height: 100vh;
 }
 
 .App-header {
   padding-top: 64px;
-  background-color: #282c34;
+  background-color: #fbf7ed;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #1b4c3f;
+  text-align: center;
 }
 
 .App-link {
@@ -29,7 +33,6 @@
 
 main {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
 }
@@ -40,6 +43,7 @@ main {
   flex-wrap: wrap;
   max-width: 100%;
   justify-content: center;
+  color: #1b4c3f;
 }
 
 .card-content {
@@ -55,6 +59,9 @@ main {
 }
 
 .nomination-complete-toast.show {
-  top: 30px;
+  top: 95px;
   transition: all 0.5s ease;
+}
+
+.remove-button {
 }

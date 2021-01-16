@@ -10,6 +10,7 @@ import { Home, Menu, Star } from "@material-ui/icons";
 import { AppBar, Badge, IconButton, Toolbar } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import { AppContext } from "./Context/context";
+import { Color } from "./color.enum";
 
 const useStyles = makeStyles({
   list: {
@@ -66,8 +67,8 @@ export default function SideBar() {
         {menuItems.map((item) => (
           <Link to={item.link}>
             <ListItem button key={item.title}>
-              <ListItemIcon>{findIcon(item.title)}</ListItemIcon>
-              <ListItemText primary={item.title} />
+              <ListItemIcon style={{ color: Color.lightText }}>{findIcon(item.title)}</ListItemIcon>
+              <ListItemText style={{ color: Color.lightText }} primary={item.title} />
             </ListItem>
           </Link>
         ))}
@@ -77,7 +78,7 @@ export default function SideBar() {
 
   return (
     <nav>
-      <AppBar color="inherit" style={{ backgroundColor: "#282c34" }}>
+      <AppBar color="inherit" style={{ backgroundColor: Color.darkBg }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -92,14 +93,20 @@ export default function SideBar() {
             aria-label="open drawer"
             onClick={() => history.push("/nominations")}
             edge="start"
+            style={{ color: Color.lightText }}
           >
-            <Badge badgeContent={nominations.length} color="default">
+            <Badge badgeContent={nominations.length} color="error">
               <Star />
             </Badge>
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer anchor={"left"} open={isDrawerOpen} onClose={toggleDrawer(false)}>
+      <Drawer
+        PaperProps={{ style: { backgroundColor: Color.darkBg } }}
+        anchor={"left"}
+        open={isDrawerOpen}
+        onClose={toggleDrawer(false)}
+      >
         {list()}
       </Drawer>
     </nav>

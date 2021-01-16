@@ -3,6 +3,7 @@ import "./App.css";
 import { Button, Card, CardActions, CardContent, CardMedia } from "@material-ui/core";
 import { AppContext } from "./Context/context";
 import { Types } from "./Context/types";
+import { Color } from "./color.enum";
 
 export interface IResult {
   Actors: string;
@@ -59,7 +60,12 @@ function SearchResult() {
 
   function showSearchResult() {
     return searchResult?.Search?.map((result) => (
-      <Card variant="elevation" className="result-card" key={result.imdbID}>
+      <Card
+        style={{ background: Color.lightBg, width: "200px" }}
+        variant="elevation"
+        className="result-card"
+        key={result.imdbID}
+      >
         <CardMedia
           component="img"
           alt={result.Title}
@@ -67,18 +73,23 @@ function SearchResult() {
           image={result.Poster}
           title={result.Title}
         />
-        <CardContent>
+        <CardContent style={{ color: Color.darkText, height: "100px" }}>
           <p>
             <strong>{result.Title}</strong>
             {result.Year}
           </p>
         </CardContent>
-        <CardActions>
+        <CardActions style={{ justifyContent: "center" }}>
           <Button
             disabled={isNominated(result) || nominationCompleted}
             size="small"
             color="primary"
+            variant="outlined"
             onClick={() => onNominationChange(result)}
+            style={{
+              color:
+                isNominated(result) || nominationCompleted ? Color.disabledText : Color.darkText,
+            }}
           >
             Nominate this
           </Button>
@@ -89,8 +100,8 @@ function SearchResult() {
 
   function showNoResult() {
     return (
-      <Card variant="elevation" className="result-card">
-        <CardContent>
+      <Card style={{ background: Color.lightBg }} variant="elevation" className="result-card">
+        <CardContent style={{ color: Color.darkText }}>
           <p>No results found</p>
         </CardContent>
       </Card>

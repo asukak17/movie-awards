@@ -4,6 +4,7 @@ import { Button, Card, CardActions, CardContent, CardMedia } from "@material-ui/
 import { IResult } from "./SearchResult";
 import { AppContext } from "./Context/context";
 import { Types } from "./Context/types";
+import { Color } from "./color.enum";
 
 function Nominations() {
   const {
@@ -21,7 +22,12 @@ function Nominations() {
 
   function showSearchResult() {
     return nominations?.map((result) => (
-      <Card variant="elevation" className="nomination-card" key={result.imdbID}>
+      <Card
+        style={{ background: Color.lightBg }}
+        variant="elevation"
+        className="nomination-card"
+        key={result.imdbID}
+      >
         <CardMedia
           component="img"
           alt={result.Title}
@@ -29,14 +35,20 @@ function Nominations() {
           image={result.Poster}
           title={result.Title}
         />
-        <CardContent className="card-content">
+        <CardContent style={{ color: Color.darkText, height: "100px" }} className="card-content">
           <p>
             <strong>{result.Title}</strong>
             {result.Year}
           </p>
         </CardContent>
-        <CardActions>
-          <Button size="small" color="primary" onClick={() => onNominationRemove(result)}>
+        <CardActions style={{ justifyContent: "center" }}>
+          <Button
+            className="remove-button"
+            variant="outlined"
+            size="small"
+            style={{ color: Color.darkText }}
+            onClick={() => onNominationRemove(result)}
+          >
             Remove this
           </Button>
         </CardActions>
@@ -46,8 +58,8 @@ function Nominations() {
 
   function showNoNominations() {
     return (
-      <Card variant="elevation" className="result-card">
-        <CardContent>
+      <Card style={{ background: Color.lightBg }} variant="elevation" className="result-card">
+        <CardContent style={{ color: Color.darkText }}>
           <p>No nominations picked yet</p>
         </CardContent>
       </Card>
