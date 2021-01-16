@@ -1,15 +1,15 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import "./App.css";
 import { IResponse } from "./SearchResult";
 import { IconButton } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
+import { AppContext } from "./Context/context";
+import { Types } from "./Context/types";
 
-type Prop = {
-  onResultChange: (data: IResponse) => void;
-};
+function SearchBox() {
+  const { dispatch } = useContext(AppContext);
 
-function SearchBox({ onResultChange }: Prop) {
   const [searchKey, setSearchKey] = useState<string>("");
   async function handleSubmit(typedKeyword: string) {
     setSearchKey(typedKeyword);
@@ -17,7 +17,7 @@ function SearchBox({ onResultChange }: Prop) {
       const response = await fetch(
         `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&s=${typedKeyword}&type=movie&page=1`
       );
-      response.json().then((data: IResponse) => onResultChange(data));
+      response.json().then((data: IResponse) => dispatch({ type: Types.setResult, payload: data }));
     } catch (err) {
       console.log("error", err);
     }

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 import Nominations from "./Nominations";
 import SearchBox from "./SearchBox";
-import SearchResult, { IResponse, IResult } from "./SearchResult";
+import SearchResult from "./SearchResult";
 import headerImage from "./header-image.svg";
 import { AppContext } from "./Context/context";
 import { Types } from "./Context/types";
@@ -14,7 +14,6 @@ function App() {
     dispatch,
   } = useContext(AppContext);
 
-  const [searchResult, setSearchResult] = useState<IResponse | null>(null);
   const [nominationCompleted, setNominationCompleted] = useState<boolean>(false);
 
   useEffect(() => {
@@ -27,25 +26,6 @@ function App() {
     if (!savedNominations) return;
     dispatch({ type: Types.setNominations, payload: JSON.parse(savedNominations) });
   }, []);
-
-  function handleSearchResult(data: IResponse) {
-    setSearchResult(data);
-  }
-
-  function handleNominationChange(movie: IResult) {
-    const matchedMovie = nominations.find((result: IResult) => result.imdbID === movie.imdbID);
-    if (matchedMovie) return;
-    dispatch({ type: Types.addNomination, payload: movie });
-    localStorage.setItem("myNominations", JSON.stringify([...nominations, movie]));
-  }
-
-  function handleRemoveNomination(movie: IResult) {
-    dispatch({ type: Types.removeNomination, payload: movie });
-    localStorage.setItem(
-      "myNominations",
-      JSON.stringify(nominations.filter((nomination) => nomination.imdbID !== movie.imdbID))
-    );
-  }
 
   return (
     <div className="App">
@@ -62,14 +42,9 @@ function App() {
           </Alert>
         )}
         <h3>Choose your 5 best movies</h3>
-        <SearchBox onResultChange={handleSearchResult} />
-        <Nominations onNominationRemove={handleRemoveNomination} />
-        <SearchResult
-          nominationCompleted={nominationCompleted}
-          searchResult={searchResult}
-          nominations={nominations}
-          onNominationChange={handleNominationChange}
-        />
+        <SearchBox />
+        <Nominations />
+        <SearchResult />
       </main>
     </div>
   );

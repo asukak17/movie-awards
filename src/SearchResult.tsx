@@ -1,13 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.css";
 import { Button, Card, CardActions, CardContent, CardMedia } from "@material-ui/core";
-
-type Props = {
-  searchResult: IResponse | null;
-  onNominationChange: (result: IResult) => void;
-  nominations: IResult[];
-  nominationCompleted: boolean;
-};
+import { AppContext } from "./Context/context";
+import { Types } from "./Context/types";
 
 export interface IResult {
   Actors: string;
@@ -44,15 +39,22 @@ export interface IResponse {
   Error?: string;
 }
 
-function SearchResult({
-  searchResult,
-  onNominationChange,
-  nominations,
-  nominationCompleted,
-}: Props) {
+function SearchResult() {
+  const {
+    dispatch,
+    state: { nominations, searchResult, nominationCompleted },
+  } = useContext(AppContext);
+
   function isNominated(result: IResult) {
     const nominatedMatch = nominations.find((nomination) => nomination.imdbID === result.imdbID);
     return nominatedMatch ? true : false;
+  }
+
+  function onNominationChange(movie: IResult) {
+    const matchedMovie = nominations.find((result: IResult) => result.imdbID === movie.imdbID);
+    if (matchedMovie) return;
+    dispatch({ type: Types.addNomination, payload: movie });
+    localStorage.setItem("myNominations", JSON.stringify([...nominations, movie]));
   }
 
   function showSearchResult() {

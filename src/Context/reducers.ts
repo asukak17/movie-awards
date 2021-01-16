@@ -6,7 +6,7 @@ export const mainReducer: Reducer<InitialStateType, actions> = (state, action) =
     case "SET_SEARCH_RESULT":
       return {
         ...state,
-        SearchResult: action.payload,
+        searchResult: action.payload,
       };
     case "ADD_NOMINATION":
       return {
