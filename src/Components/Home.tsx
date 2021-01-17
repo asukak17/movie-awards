@@ -7,7 +7,7 @@ const Home = () => (
       The Shoppies
       <img src={headerImage} width={100} height={100} alt="mission impossible" />
     </h1>
-    <p style={{ fontSize: "16px" }}>Choose your 5 best movies</p>
+    <p style={{ fontSize: "16px" }}>Choose your 5 best movies to vote for the movie award!</p>
   </header>
 );
 
