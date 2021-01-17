@@ -65,7 +65,7 @@ export default function SideBar() {
     >
       <List>
         {menuItems.map((item) => (
-          <Link to={item.link}>
+          <Link to={item.link} key={item.title}>
             <ListItem button key={item.title}>
               <ListItemIcon style={{ color: Color.lightText }}>{findIcon(item.title)}</ListItemIcon>
               <ListItemText style={{ color: Color.lightText }} primary={item.title} />

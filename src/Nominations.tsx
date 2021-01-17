@@ -36,10 +36,8 @@ function Nominations() {
           title={result.Title}
         />
         <CardContent style={{ color: Color.darkText, height: "100px" }} className="card-content">
-          <p>
-            <strong>{result.Title}</strong>
-            {result.Year}
-          </p>
+          <strong>{result.Title}</strong>
+          <p>{result.Year}</p>
         </CardContent>
         <CardActions style={{ justifyContent: "center" }}>
           <Button

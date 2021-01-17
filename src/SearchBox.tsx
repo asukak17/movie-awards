@@ -18,7 +18,7 @@ function SearchBox() {
     setSearchKey(typedKeyword);
     try {
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&s=${typedKeyword}&type=movie&page=1`
+        `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&s=${typedKeyword}&type=movie&page=1`
       );
       response.json().then((data: IResponse) => dispatch({ type: Types.setResult, payload: data }));
     } catch (err) {

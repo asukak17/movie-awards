@@ -74,10 +74,8 @@ function SearchResult() {
           title={result.Title}
         />
         <CardContent style={{ color: Color.darkText, height: "100px" }}>
-          <p>
-            <strong>{result.Title}</strong>
-            {result.Year}
-          </p>
+          <strong>{result.Title}</strong>
+          <p>{result.Year}</p>
         </CardContent>
         <CardActions style={{ justifyContent: "center" }}>
           <Button

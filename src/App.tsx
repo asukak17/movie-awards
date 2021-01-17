@@ -17,14 +17,11 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: Types.setNominationCompleted, payload: nominations.length >= 5 });
-  }, [nominations.length]);
-
-  useEffect(() => {
     if (nominations.length) return;
     const savedNominations = localStorage.getItem("myNominations");
-    if (!savedNominations) return;
+    if (!savedNominations || !dispatch) return;
     dispatch({ type: Types.setNominations, payload: JSON.parse(savedNominations) });
-  }, []);
+  }, [nominations.length, dispatch]);
 
   return (
     <Router>

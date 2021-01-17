@@ -2,7 +2,7 @@
 
 import React, { createContext, useReducer } from "react";
 import { mainReducer } from "./reducers";
-import { InitialStateType, actions } from "./types";
+import { InitialStateType } from "./types";
 
 const initialState: InitialStateType = {
   nominations: [],
