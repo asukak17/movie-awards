@@ -9,8 +9,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { Home, Menu, Star } from "@material-ui/icons";
 import { AppBar, Badge, IconButton, Toolbar } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
-import { AppContext } from "./Context/context";
-import { Color } from "./color.enum";
+import { AppContext } from "../Context/context";
+import { Color } from "../Types/color.enum";
 
 const useStyles = makeStyles({
   list: {

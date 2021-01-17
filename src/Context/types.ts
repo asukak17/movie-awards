@@ -1,4 +1,4 @@
-import { IResponse, IResult } from "../SearchResult";
+import { IResponse, IResult } from "../Components/SearchResult";
 
 export enum Types {
   setResult = "SET_SEARCH_RESULT",

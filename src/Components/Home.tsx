@@ -1,5 +1,5 @@
 import React from "react";
-import headerImage from "./header-image.svg";
+import headerImage from "../Assets/header-image.svg";
 
 const Home = () => (
   <header className="App-header">

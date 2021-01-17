@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useContext, useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import "./App.css";
+import "../App.css";
 import { IResponse } from "./SearchResult";
 import { IconButton } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
-import { AppContext } from "./Context/context";
-import { Types } from "./Context/types";
+import { AppContext } from "../Context/context";
+import { Types } from "../Context/types";
 import { useHistory } from "react-router-dom";
-import { Color } from "./color.enum";
+import { Color } from "../Types/color.enum";
 
 function SearchBox() {
   const { dispatch } = useContext(AppContext);

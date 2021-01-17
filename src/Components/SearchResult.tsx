@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import "./App.css";
 import { Button, Card, CardActions, CardContent, CardMedia } from "@material-ui/core";
-import { AppContext } from "./Context/context";
-import { Types } from "./Context/types";
-import { Color } from "./color.enum";
+import { AppContext } from "../Context/context";
+import { Types } from "../Context/types";
+import { Color } from "../Types/color.enum";
 
 export interface IResult {
   Actors: string;

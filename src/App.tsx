@@ -1,14 +1,14 @@
 import { Alert } from "@material-ui/lab";
 import React, { useContext, useEffect } from "react";
 import "./App.css";
-import Nominations from "./Nominations";
-import SearchBox from "./SearchBox";
-import SearchResult from "./SearchResult";
+import Nominations from "./Components/Nominations";
+import SearchBox from "./Components/SearchBox";
+import SearchResult from "./Components/SearchResult";
 import { AppContext } from "./Context/context";
 import { Types } from "./Context/types";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Home from "./Home";
-import SideBar from "./Drawer";
+import Home from "./Components/Home";
+import SideBar from "./Components/Drawer";
 function App() {
   const {
     state: { nominations, nominationCompleted },
