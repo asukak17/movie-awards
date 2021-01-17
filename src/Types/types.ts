@@ -1,19 +1,11 @@
-import { IResponse, IResult } from "../Components/SearchResult";
-
-export enum Types {
-  setResult = "SET_SEARCH_RESULT",
-  addNomination = "ADD_NOMINATION",
-  removeNomination = "REMOVE_NOMINATION",
-  setNominations = "SET_NOMINATIONS",
-  setNominationCompleted = "SET_NOMINATION_COMPLETED",
-}
+import { IResponse, IResult, ActionTypes } from "../Types";
 
 export type payload = {
-  [Types.setResult]: IResponse;
-  [Types.addNomination]: IResult;
-  [Types.setNominations]: IResult[];
-  [Types.removeNomination]: IResult;
-  [Types.setNominationCompleted]: boolean;
+  [ActionTypes.setResult]: IResponse;
+  [ActionTypes.addNomination]: IResult;
+  [ActionTypes.setNominations]: IResult[];
+  [ActionTypes.removeNomination]: IResult;
+  [ActionTypes.setNominationCompleted]: boolean;
 };
 
 export type ActionMap<M extends { [index: string]: any }> = {

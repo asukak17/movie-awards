@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { actions, InitialStateType } from "./types";
+import { actions, InitialStateType } from "../Types/types";
 
 export const mainReducer: Reducer<InitialStateType, actions> = (state, action) => {
   switch (action.type) {

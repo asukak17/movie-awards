@@ -1,43 +1,7 @@
 import React, { useContext } from "react";
 import { Button, Card, CardActions, CardContent, CardMedia } from "@material-ui/core";
 import { AppContext } from "../Context/context";
-import { Types } from "../Context/types";
-import { Color } from "../Types/color.enum";
-
-export interface IResult {
-  Actors: string;
-  Awards: string;
-  BoxOffice: string;
-  Country: string;
-  DVD: string;
-  Director: string;
-  Genre: string;
-  Language: string;
-  Metascore: string;
-  Plot: string;
-  Poster: string;
-  Production: string;
-  Rated: string;
-  Ratings: Array<any>;
-  Released: string;
-  Response: string;
-  Runtime: string;
-  Title: string;
-  Type: string;
-  Website: string;
-  Writer: string;
-  Year: string;
-  imdbID: string;
-  imdbRating: string;
-  imdbVotes: string;
-}
-
-export interface IResponse {
-  Search?: IResult[];
-  totalResults?: string;
-  Response: string;
-  Error?: string;
-}
+import { ActionTypes, Color, IResult } from "../Types";
 
 function SearchResult() {
   const {
@@ -53,7 +17,7 @@ function SearchResult() {
   function onNominationChange(movie: IResult) {
     const matchedMovie = nominations.find((result: IResult) => result.imdbID === movie.imdbID);
     if (matchedMovie) return;
-    dispatch({ type: Types.addNomination, payload: movie });
+    dispatch({ type: ActionTypes.addNomination, payload: movie });
     localStorage.setItem("myNominations", JSON.stringify([...nominations, movie]));
   }
 

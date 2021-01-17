@@ -5,7 +5,7 @@ import Nominations from "./Components/Nominations";
 import SearchBox from "./Components/SearchBox";
 import SearchResult from "./Components/SearchResult";
 import { AppContext } from "./Context/context";
-import { Types } from "./Context/types";
+import { ActionTypes } from "./Types";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./Components/Home";
 import SideBar from "./Components/Drawer";
@@ -16,11 +16,11 @@ function App() {
   } = useContext(AppContext);
 
   useEffect(() => {
-    dispatch({ type: Types.setNominationCompleted, payload: nominations.length >= 5 });
+    dispatch({ type: ActionTypes.setNominationCompleted, payload: nominations.length >= 5 });
     if (nominations.length) return;
     const savedNominations = localStorage.getItem("myNominations");
     if (!savedNominations || !dispatch) return;
-    dispatch({ type: Types.setNominations, payload: JSON.parse(savedNominations) });
+    dispatch({ type: ActionTypes.setNominations, payload: JSON.parse(savedNominations) });
   }, [nominations.length, dispatch]);
 
   return (

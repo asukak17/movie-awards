@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import { Button, Card, CardActions, CardContent, CardMedia } from "@material-ui/core";
-import { IResult } from "./SearchResult";
 import { AppContext } from "../Context/context";
-import { Types } from "../Context/types";
-import { Color } from "../Types/color.enum";
+import { Color, ActionTypes, IResult } from "../Types";
 
 function Nominations() {
   const {
@@ -12,7 +10,7 @@ function Nominations() {
   } = useContext(AppContext);
 
   function onNominationRemove(movie: IResult) {
-    dispatch({ type: Types.removeNomination, payload: movie });
+    dispatch({ type: ActionTypes.removeNomination, payload: movie });
     localStorage.setItem(
       "myNominations",
       JSON.stringify(nominations.filter((nomination) => nomination.imdbID !== movie.imdbID))
