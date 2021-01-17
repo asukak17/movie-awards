@@ -2,7 +2,7 @@
 
 ## Overview
 
-Shoppies allows you to choose your five favorite app for movie awards for entrepreneurs!
+Shoppies allows you to choose your five favorite titles for movie awards for entrepreneurs!
 Search by the title, click "Nominate this" button to select, remove one from nomination by simply clicking "Remove this" button.
 
 ## How to use
