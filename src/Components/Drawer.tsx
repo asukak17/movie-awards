@@ -14,7 +14,8 @@ import { Color } from "../Types/color.enum";
 
 const useStyles = makeStyles({
   list: {
-    width: "30vw",
+    minWidth: "250px",
+    width: "25vw",
   },
   fullList: {
     width: "auto",
